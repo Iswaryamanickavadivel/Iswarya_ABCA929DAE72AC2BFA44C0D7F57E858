@@ -1,38 +1,41 @@
-class BankAccount:
-  
-  def __init__(self, account_number, account_holder_name, initial_balance=0.0):
-    self.__account_number = account_number
-    self.__account_holder_name = account_holder_name
-    self.__account_balance = initial_balance
+'''
+Implement a function called sort_students that takes a list of student objects as input and sorts the
+list based on their CGPA (Cumulative Grade Point Average) in descending order. Each student object
+has the following attributes: name (string), roll_number (string), and cgpa (float). Test the function
+with different input lists of students.
+'''
 
-  def deposit(self, amount):
-    if amount > 0:
-      self.__account_balance += amount
-      print("Deposited {}. New balance: ₹{}".format(amount,self.__account_balance))
+class Student:
 
-    else:
-      print("Invalid deposit amount. Please deposit a positive amount.")
-
-
-  def withdraw(self, amount):
-    if amount > 0 and amount <= self.__account_balance:
-      self.__account_balance -= amount
-      print("Withdrew {}. New balance: ₹{}".format(amount,self.__account_balance))
-    else:
-      print("Invalid withdrawal amount or insufficient balance.")
+  def __init__(self, name, roll_number, cgpa):
+    self.name = name
+    self.roll_number = roll_number
+    self.cgpa = cgpa
 
 
-  def display_balance(self):
-    print("Account balance for {} (Account {}): ₹{}".format(self.__account_holder_name, self.__account_number,self.__account_balance))
-# Create an instance of the BankAccount class
+def sort_students(student_list):
+  # Sort the list of students in descending order of CGPA
+  sorted_students = sorted(student_list,
+                           key=lambda student: student.cgpa,
+                           reverse=True)
+  # Syntax - lambda arg:exp
+  return sorted_students
 
-account=BankAccount(account_number="9080453407",
-                      account_holder_name="CHANDRU",
-                      initial_balance=5000.0)
 
-account.display_balance()
-account.deposit(500.0)
-account.withdraw(200.0)
-account.display_balance()
-account.deposit(500000)
-account.withdraw(443527.0)
+# Example usage:
+students = [
+    Student("Chandru  ", "A123",20.8),
+    Student("Partha     ", "A124",15.9),
+    Student("Mari        " , "A125",12.1),
+    Student("Rithish " , "A126",10.1),
+    Student("Poova  ", "A127",13.9),
+    Student("Anbu   ", "A128",16.8),
+]
+
+sorted_students = sort_students(students)
+
+# Print the sorted list of students
+for student in sorted_students:
+  print("Name: {}, Roll Number: {}, CGPA: {}".format(student.name,
+                                                     student.roll_number,
+                                                     student.cgpa))
